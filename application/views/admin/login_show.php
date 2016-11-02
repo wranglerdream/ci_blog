@@ -27,8 +27,8 @@ $(function(){
 		<h1>Blog</h1>
 		<h2>欢迎使用博客管理平台</h2>
 		<div class="form">
-			<p style="color:red"><!-- 用户名错误 --></p>
-			<form action="<?php echo site_url('admin/login/login_run');?>" method="post">
+			<p style="color:red"><?php echo validation_errors();if(isset($errors_info)){echo $errors_info;}?></p>
+			<?php echo form_open('admin/login/login_run');?>
 				<ul>
 					<li>
 					<input type="text" name="aname" class="text"/>
