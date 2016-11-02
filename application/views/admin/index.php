@@ -11,6 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<script src="<?php echo base_url('style/admin/js/ch-ui.admin.js');?>"></script>
 	<script src="<?php echo base_url('style/admin/layer/layer.js');?>"></script>
 </head>
+
 <body>
 	<!--头部 开始-->
     <div class="top_box">
@@ -23,9 +24,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 		<div class="top_right">
 			<ul>
-				<li>管理员：admin</li>
-				<li><a href="pass.html" target="main">修改密码</a></li>
-				<li><a href="#">退出</a></li>
+				<li>管理员：<?php echo $this->session->aName;?></li>
+				<li><a href="<?php echo site_url('admin/Admin/passwd');?>" target="main">修改密码</a></li>
+				<li><a href="<?php echo site_url('admin/login/login_out');?>" id="loginout">退出</a></li>
 			</ul>
 		</div>
 	</div>
