@@ -11,15 +11,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<script src="<?php echo base_url('style/admin/js/ch-ui.admin.js');?>"></script>
 	<script src="<?php echo base_url('style/admin/layer/layer.js');?>"></script>
 </head>
-
+<script type="text/javascript">
+	$(function(){
+        $("#loginout").click(function(){
+        	var $url = $(this).attr("href");
+            layer.confirm('您确定要退出吗?',{
+            	btn:['确定','取消'],btn2:function(index){}},function(index){window.location.href=$url;});
+            return false;
+        });
+	});
+</script>
 <body>
 	<!--头部 开始-->
     <div class="top_box">
 		<div class="top_left">
-			<div class="logo">后台管理模板</div>
+			<div class="logo">后台管理</div>
 			<ul>
-				<li><a href="/" class="active">首页</a></li>
-				<li><a href="#">管理页</a></li>
+				<li><a href="#" class="active">首页</a></li>
+				<!-- <li><a href="#">管理页</a></li> -->
 			</ul>
 		</div>
 		<div class="top_right">
@@ -36,12 +45,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div class="menu_box">
 		<ul>
 	        <li>
-	        	<h3><i class="fa fa-fw fa-clipboard"></i>常用操作</h3>
+	        	<h3><i class="fa fa-fw fa-clipboard"></i>资讯管理</h3>
 	            <ul class="sub_menu">
-	                <li><a href="add.html" target="main"><i class="fa fa-fw fa-plus-square"></i>添加页</a></li>
-	                <li><a href="list.html" target="main"><i class="fa fa-fw fa-list-ul"></i>列表页</a></li>
-	                <li><a href="tab.html" target="main"><i class="fa fa-fw fa-list-alt"></i>tab页</a></li>
-	                <li><a href="img.html" target="main"><i class="fa fa-fw fa-image"></i>图片列表</a></li>
+	                <li><a href="<?php echo site_url('admin/news/news_cls_list');?>" target="main"><i class="fa fa-fw fa-plus-square"></i>资讯分类列表</a></li>
+	                <li><a href="<?php echo site_url('admin/news/news_cls_add');?>" target="main"><i class="fa fa-fw fa-list-ul"></i>资讯分类添加</a></li>
+	                <li><a href="<?php echo site_url('admin/news/news_list');?>" target="main"><i class="fa fa-fw fa-list-alt"></i>资讯列表</a></li>
+	                <li><a href="<?php echo site_url('admin/news/news_add');?>" target="main"><i class="fa fa-fw fa-image"></i>资讯添加</a></li>
 	            </ul>
 	        </li>
 	        <li>

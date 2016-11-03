@@ -54,4 +54,9 @@ class Login extends CI_Controller{
         }
       }
     }
+
+    public function login_out(){
+      session_destroy();
+      redirect('admin/admin/index');
+    }
 }
