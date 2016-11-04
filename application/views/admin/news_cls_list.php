@@ -43,7 +43,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!--结果页快捷搜索框 结束-->
 
     <!--搜索结果页面 列表 开始-->
-    <form action="#" method="post">
+       <?php echo form_open('admin/News/news_menu_all_run');?>
         <div class="result_wrap">
             <!--快捷导航 开始-->
             <div class="result_content">
@@ -58,7 +58,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="result_content">
                 <table class="list_tab">
                     <tr>
-                        <th class="tc" width="5%"><input type="checkbox" name=""></th>
+                        <th class="tc" width="5%"><input type="checkbox" name=""><input type="hidden" name="all_do" value="1"></th>
                         <th class="tc">排序</th>
                         <th class="tc">ID</th>
                         <th>分类名称</th>
@@ -71,9 +71,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <?php foreach($news_cls_list as $val):?>
                     <?php if($val['level']==1):?>
                     <tr>
-                        <td class="tc"><input type="checkbox" name="id" value="<?php echo $val['id'];?>"></td>
+                        <td class="tc"><input type="checkbox" name="id[]" value="<?php echo $val['id'];?>"></td>
                         <td class="tc">
-                            <input type="text" name="sort" value="<?php echo $val['sort'];?>">
+                            <input type="text" name="sort[]" value="<?php echo $val['sort'];?>">
                         </td>
                         <td class="tc"><?php echo $val['id'];?></td>
                         <td>|-<?php echo $val['title'];?></td>
@@ -83,16 +83,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <td><?php echo $val['condition'];?></td>
                         <td>
                             <a href="#">修改</a>
-                            <a href="<?php echo site_url('admin/news/news_cls_del_run/id/'.$val['id']);?>">删除</a>
+                            <a href="<?php echo site_url('admin/News/news_menu_del_run/'.$val['id']);?>">删除</a>
                         </td>
                     </tr>
                     <?php endif;?>
                         <?php foreach($news_cls_list as $vall):?>
                         <?php if($vall['pid']==$val['id']):?>
                         <tr>
-                            <td class="tc"><input type="checkbox" name="id" value="<?php echo $vall['id'];?>"></td>
+                            <td class="tc"><input type="checkbox" name="id[]" value="<?php echo $vall['id'];?>"></td>
                             <td class="tc">
-                                <input type="text" name="sort" value="<?php echo $vall['sort'];?>">
+                                <input type="text" name="sort[]" value="<?php echo $vall['sort'];?>">
                             </td>
                             <td class="tc"><?php echo $vall['id'];?></td>
                             <td>|--<?php echo $vall['title'];?></td>
@@ -102,14 +102,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <td><?php echo $vall['condition'];?></td>
                             <td>
                                 <a href="#">修改</a>
-                                <a href="<?php echo site_url('admin/news/news_cls_del_run/id/'.$vall['id']);?>">删除</a>
+                                <a href="<?php echo site_url('admin/News/news_menu_del_run/'.$vall['id']);?>">删除</a>
                             </td>
                         </tr>
                         <?php endif;?>
                         <?php endforeach;?>
                     <?php endforeach;?>
                     <tr>
-                        <td colspan="9"><a>排序</a> <a>批量删除</a></td>
+                        <td colspan="9">
+                        <a href="javascript:" id="sort_all">排序</a> 
+                        <a href="javascript:" id="del_all">批量删除</a></td>
                     </tr>
                 </table>
 
@@ -147,4 +149,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </form>
     <!--搜索结果页面 列表 结束-->
 </body>
+<script type="text/javascript">
+    $(function(){
+        $("#sort_all").click(function(){
+            var $checklength = $("input[type='checkbox']:checked").length;
+            if($checklength<1){layer.alert('请选择要进行排序的分类！',{icon:5});return false;}
+            $("form:eq(1)").submit();
+        });
+
+        $("#del_all").click(function(){
+            $("input[name='all_do']").val(2);
+            var $checklength = $("input[type='checkbox']:checked").length;
+            if($checklength<1){layer.alert('请选择要删除的分类！',{icon:5});return false;}
+            $("form:eq(1)").submit();
+        });
+    });
+</script>
 </html>

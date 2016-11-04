@@ -13,7 +13,7 @@ class News_menu_Model extends CI_Model{
 	public function get_one_news_menu($id = FALSE){
 
 		if($id === FALSE){
-			$query = $this->db->order_by('pid')->get('news_menu');
+			$query = $this->db->order_by('pid,sort')->get('news_menu');
 			return $query->result_array();
 		}
 
@@ -39,4 +39,40 @@ class News_menu_Model extends CI_Model{
 
         return $this->db->insert('news_menu',$data);
 	}
+
+     /**
+    *获取分类id 进行删除
+    */
+    public function news_menu_del_run($id = FALSE){
+
+        if($id === FALSE){
+            return false;
+        }
+
+        if(count($id)>1){
+            $this->db->where_in('id',$id);
+            $this->db->delete('news_menu');
+        }else{
+            $id=is_array($id) ? $id[0]:$id;
+            $this->db->delete('news_menu',array('id'=>$id));
+        }
+    }
+
+    /**
+    *获取一级分类的分类列表 or 单个分类信息
+    */
+    public function news_menu_sort_run($id_array=array(),$sort_array=array()){
+        if(count($id_array)<1||count($sort_array)<1){
+            return false;
+        }
+
+        foreach($id_array as $key=>$val){
+
+            $data = array('sort'=>$sort_array[$key]);
+            
+            $this->db->where('id',$val);
+            
+            $this->db->update('news_menu',$data);
+        }
+    }
 }

@@ -855,3 +855,15 @@ if ( ! function_exists('function_usable'))
 		return FALSE;
 	}
 }
+
+/********
+*******
+*****/
+if ( ! function_exists('p'))
+{
+	function p($data){
+		echo '<pre>';
+		var_dump($data);
+	    echo '</pre>';
+	}
+}

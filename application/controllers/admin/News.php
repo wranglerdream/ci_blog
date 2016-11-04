@@ -45,7 +45,23 @@ class News extends CI_Controller {
 
 	public function news_menu_del_run(){
 		
-		$this->news_menu_model->news_menu_del_run();
+		$id = $this->uri->segment(4);
+		$this->news_menu_model->news_menu_del_run($id);
+		$this->news_cls_list();
+	}
+
+	public function news_menu_all_run(){
+		$all_do = $this->input->post('all_do');
+		$id_array = $this->input->post('id');
+		$sort_array = $this->input->post('sort');
+
+		if($all_do==1){
+            $this->news_menu_model->news_menu_sort_run($id_array,$sort_array);
+		}else{
+			
+			$this->news_menu_model->news_menu_del_run($id_array);
+		}
+		
 		$this->news_cls_list();
 	}
     
