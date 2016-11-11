@@ -16,9 +16,15 @@ class News_menu_Model extends CI_Model{
 			$query = $this->db->order_by('pid,sort')->get('news_menu');
 			return $query->result_array();
 		}
-
-		$query = $this->db->get_where('news_menu',array('id'=>$id));
-		return $query->row_array();
+        
+        if($id>0){
+            $query = $this->db->get_where('news_menu',array('id'=>$id));
+            return $query->row_array();
+        }else{
+            $query = $this->db->get_where('news_menu',array('pid'=>$id));
+            return $query->result_array();
+        }
+		
 	}
 
 	/**

@@ -55,7 +55,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <select name="pid">
                                 <option value="0">==请选择==</option>
                                 <?php foreach($one_news_menu_list as $menu_list):?>
-                                    <option value="<?=$menu_list['id'];?>"><?=$menu_list['title'];?></option>
+                                    <option value="<?=$menu_list['id'];?>" 
+                                    <?php if($menu_list['id']==$one_news_menu_info['pid']):?>
+                                        selected="selected"
+                                    <?php endif;?>
+                                    >
+                                        <?=$menu_list['title'];?></option>
                                 <?php endforeach;?>
                             </select>
                         </td>
@@ -63,27 +68,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <tr>
                         <th><i class="require">*</i>分类名称：</th>
                         <td>
-                            <input type="text" class="lg" name="title" value="">
+                            <input type="text" class="lg" name="title" value="<?php echo $one_news_menu_info['title'];?>">
                         </td>
                     </tr>
                    
                     <tr>
                         <th>分类状态：</th>
                         <td>
-                            <label for=""><input type="radio" name="status" checked="checked" value="1">可用</label>
-                            <label for=""><input type="radio" name="status" value="">不可用</label>
+                            <label for="">
+                                <input type="radio" name="status" value="1" <?php if($one_news_menu_info['status']==1):?>checked="checked"<?php endif;?>>可用
+                            </label>
+                            <label for="">
+                                <input type="radio" name="status" vlaue="" <?php if($one_news_menu_info['status']!=1):?>checked="checked"<?php endif;?>>不可用
+                            </label>
                         </td>
                     </tr>
                     <tr>
                         <th>分类描述：</th>
                         <td>
-                            <textarea name="condition"></textarea>
+                            <textarea name="condition"><?php echo $one_news_menu_info['condition'];?></textarea>
                         </td>
                     </tr>
                     <tr>
                         <th><i class="require">*</i>排序：</th>
                         <td>
-                            <input type="text" class="sm" name="sort" value="50">
+                            <input type="text" class="sm" name="sort" value="<?php echo $one_news_menu_info['sort'];?>">
                             <span><i class="fa fa-exclamation-circle yellow"></i>默认50</span>
                         </td>
                     </tr>

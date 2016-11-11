@@ -40,7 +40,8 @@ class News extends CI_Controller {
         $id = $this->uri->segment(4);
         
         $data['one_news_menu_info']=$this->news_menu_model->get_one_news_menu($id);
-        $data['news_cls_list'] = $this->news_menu_model->get_one_news_menu();
+        $data['one_news_menu_list'] = $this->news_menu_model->get_one_news_menu(0);
+
 		$this->load->view('admin/news_cls_edit',$data);
 	}
 
@@ -70,7 +71,6 @@ class News extends CI_Controller {
 		if($all_do==1){
             $this->news_menu_model->news_menu_sort_run($id_array,$sort_array);
 		}else{
-			
 			$this->news_menu_model->news_menu_del_run($id_array);
 		}
 		

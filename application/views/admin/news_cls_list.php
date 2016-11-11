@@ -135,17 +135,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </body>
 <script type="text/javascript">
     $(function(){
-        $("#sort_all").click(function(){
-            var $checklength = $("input[type='checkbox']:checked").length;
-            if($checklength<1){layer.alert('请选择要进行排序的分类！',{icon:5});return false;}
-            $("form:eq(1)").submit();
-        });
-
         $("#del_all").click(function(){
             $("input[name='all_do']").val(2);
             var $checklength = $("input[type='checkbox']:checked").length;
             if($checklength<1){layer.alert('请选择要删除的分类！',{icon:5});return false;}
-            $("form:eq(1)").submit();
+            $("form:eq(0)").submit();
         });
     });
     function del_onle(obj){
