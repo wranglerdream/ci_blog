@@ -32,6 +32,18 @@ class News extends CI_Controller {
 		}
 	}
 
+	public function news_menu_edit()
+	{   
+		if(!file_exists(APPPATH.'views/admin/news_cls_edit.php')){
+			show_404();
+		}
+        $id = $this->uri->segment(4);
+        
+        $data['one_news_menu_info']=$this->news_menu_model->get_one_news_menu($id);
+        $data['news_cls_list'] = $this->news_menu_model->get_one_news_menu();
+		$this->load->view('admin/news_cls_edit',$data);
+	}
+
 	public function news_cls_list()
 	{   
 		if(!file_exists(APPPATH.'views/admin/news_cls_list.php')){

@@ -22,23 +22,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<!--结果页快捷搜索框 开始-->
 	<div class="search_wrap">
-        <form action="" method="post">
-            <table class="search_tab">
-                <tr>
-                    <th width="120">选择分类:</th>
-                    <td>
-                        <select onchange="javascript:location.href=this.value;">
-                            <option value="">全部</option>
-                            <option value="http://www.baidu.com">百度</option>
-                            <option value="http://www.sina.com">新浪</option>
-                        </select>
-                    </td>
-                    <th width="70">关键字:</th>
-                    <td><input type="text" name="keywords" placeholder="关键字"></td>
-                    <td><input type="submit" name="sub" value="查询"></td>
-                </tr>
-            </table>
-        </form>
+        
     </div>
     <!--结果页快捷搜索框 结束-->
 
@@ -82,8 +66,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <td><?php echo date('Y-m-d H:i:s',$val['addtime']);?></td>
                         <td><?php echo $val['condition'];?></td>
                         <td>
-                            <a href="#">修改</a>
-                            <a href="<?php echo site_url('admin/News/news_menu_del_run/'.$val['id']);?>">删除</a>
+                            <a href="<?php echo site_url('admin/News/news_menu_edit/'.$val['id']);?>"">修改</a>
+                            <a data="<?php echo site_url('admin/News/news_menu_del_run/'.$val['id']);?>" onclick="del_onle(this);"> 删除</a>
                         </td>
                     </tr>
                     <?php endif;?>
@@ -101,8 +85,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <td><?php echo date('Y-m-d H:i:s',$vall['addtime']);?></td>
                             <td><?php echo $vall['condition'];?></td>
                             <td>
-                                <a href="#">修改</a>
-                                <a href="<?php echo site_url('admin/News/news_menu_del_run/'.$vall['id']);?>">删除</a>
+                                <a href="<?php echo site_url('admin/News/news_menu_edit/'.$vall['id']);?>">修改</a>
+                                <a data="<?php echo site_url('admin/News/news_menu_del_run/'.$vall['id']);?>" onclick="del_onle(this);">删除</a>
                             </td>
                         </tr>
                         <?php endif;?>
@@ -110,7 +94,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <?php endforeach;?>
                     <tr>
                         <td colspan="9">
-                        <a href="javascript:" id="sort_all">排序</a> 
+                        <!-- <a href="javascript:" id="sort_all">排序</a>  -->
                         <a href="javascript:" id="del_all">批量删除</a></td>
                     </tr>
                 </table>
@@ -164,5 +148,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             $("form:eq(1)").submit();
         });
     });
+    function del_onle(obj){
+
+        layer.confirm('你确定要删除该信息吗？', {icon: 3}, function(index){
+            layer.close(index);
+            window.location.href=$(obj).attr("data");
+        });
+        return false;
+    }
 </script>
 </html>
